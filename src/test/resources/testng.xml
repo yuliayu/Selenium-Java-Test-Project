@@ -2,6 +2,8 @@
 
 <suite name="firstTestSuite" verbose="1" >
     <parameter name="email" value="viktor.zhurbenko@gmail.com"/>
+    <parameter name="wrong_email" value="yurchenkogmail.com"/>
+
 
     <test name="SmokeTest">
         <classes>
