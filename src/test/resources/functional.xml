@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="firstTestSuite" verbose="1" >
+<suite name="functionalTests" verbose="1" >
     <parameter name="email" value="viktor.zhurbenko@gmail.com"/>
     <parameter name="wrong_email" value="yurchenkogmail.com"/>
 
