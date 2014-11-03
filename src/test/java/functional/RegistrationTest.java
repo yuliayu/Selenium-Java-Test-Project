@@ -17,12 +17,12 @@ public void fillFormTest(User user)
         HomePage homePage = new HomePage();
         homePage.registration();
         RegistrationPage registrationPage = new RegistrationPage();
-        registrationPage.registrationForm(User user);
+        registrationPage.registrationForm(user);
         registrationPage.registerButton();
 
         if (registrationPage.isSuccess())
         {
-            LoggedInPage loggedInPage = new LoggedInPage()
+            LoggedInPage loggedInPage = new LoggedInPage();
         }
         Assert.assertTrue(registrationPage.isSuccess());
     }

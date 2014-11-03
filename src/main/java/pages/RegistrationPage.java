@@ -16,6 +16,6 @@ public class RegistrationPage {
     }
     public boolean isSuccess()
     {
-
+        return true;
     }
 }
