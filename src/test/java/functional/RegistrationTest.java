@@ -54,7 +54,7 @@ public class RegistrationTest {
         System.out.println( "Confirm password: " + passwd2);
         WebElement elementForm =  driver.findElement(By.id("reg-form"));
         elementForm.submit();
-        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         System.out.println( "Opened result page " + driver.getCurrentUrl());
 
 
