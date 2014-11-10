@@ -11,7 +11,10 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.HomePage;
+import selenium.WebDriverFactory;
+import selenium.WebDriverWrapper;
 import utils.Log4Test;
+import utils.PropertyLoader;
 
 import java.util.concurrent.TimeUnit;
 
@@ -20,14 +23,14 @@ import java.util.concurrent.TimeUnit;
  */
 public class ComparePricesTest {
 
-    private static WebDriver driver;
+    private static WebDriverWrapper driver;
     private static final By searchField = By.id("searchbox");
     private static final By searchBtn = By.id("doSearch");
 
     @DataProvider
     public Object [][] filters() {
         return new Object[][] {
-                new Object[] {"http://hotline.ua", "Newdwe"},
+                new Object[] {"http://hotline.ua", "Nexus"},
 
         };
     }
@@ -36,26 +39,26 @@ public class ComparePricesTest {
     @BeforeSuite
     public void setEnv()
     {
-        driver = new FirefoxDriver();
+        driver = WebDriverFactory.initDriver(PropertyLoader.loadProperty("browser.name"));
     }
-    // @Parameters({ "siteURL", "searchField"})
+
     @Test(dataProvider = "filters")
     public void comparePrices(String siteURL, String searchQuery)
 
     {
         Log4Test.info("Start test of prices comparing");
         driver.get(siteURL);
-        Log4Test.info("Opening URL: " + siteURL );
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        Log4Test.info("Opening URL: " + siteURL);
+    driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         driver.findElement(searchField).sendKeys(searchQuery);
         driver.findElement(searchBtn).submit();
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         Assert.assertTrue((driver.findElement(By.partialLinkText(searchQuery)).isDisplayed()), Log4Test.error("Couldn't find product" + searchQuery));
         Log4Test.info("Searching for product:" + searchQuery + "on: " + driver.getCurrentUrl());
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+     driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         driver.findElement(By.className("but-box")).click();
         Log4Test.info("Opening page with prices: " + driver.getCurrentUrl());
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+   driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         int sum = driver.findElements(By.xpath("//a[contains(@href,'/go/price/') and @class='orng']")).size();
         Assert.assertTrue((sum >= 2), Log4Test.error("Test passed, number of prices on page is : " + sum));
 /*
