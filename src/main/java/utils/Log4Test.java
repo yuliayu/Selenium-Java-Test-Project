@@ -1,12 +1,10 @@
 package utils;
-/*
+
 import org.testng.Reporter;
+import org.apache.log4j.Logger;
 
-import java.util.log4j.Logger;
 
-//import java.util.log4j.Logger;*/
-
-/*public class Log4Test {
+public class Log4Test {
    private Log4Test() {}
 
     private static final Logger LOGGER = Logger.getLogger(String.valueOf(Log4Test.class));
@@ -30,4 +28,4 @@ import java.util.log4j.Logger;
     }
 
 }
-*/
+
