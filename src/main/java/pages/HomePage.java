@@ -14,6 +14,9 @@ public class HomePage {
 
     public void findProduct()
     {
+    }
+    public void comparePrices()
+    {
 
     }
 }

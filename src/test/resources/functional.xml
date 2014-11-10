@@ -1,12 +1,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="functionalTests" verbose="1" >
-    <parameter name="siteURL" value="http://hotline.ua"/>
-    <parameter name="searchField" value="Nexus"/>
-
     <test name="FindProduct">
         <classes>
-            <class name="functional.FindProductTest" />
+            <class name="functional.ComparePricesTest" />
         </classes>
     </test>
 </suite>
+
