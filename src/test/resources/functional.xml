@@ -1,13 +1,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="functionalTests" verbose="1" >
-    <parameter name="email" value="viktor.zhurbenko@gmail.com"/>
-    <parameter name="wrong_email" value="yurchenkogmail.com"/>
-
-
-    <test name="SmokeTest">
+    <test name="FindProduct">
         <classes>
-            <class name="simple.CheckEmail" />
+            <class name="functional.ComparePricesTest" />
         </classes>
     </test>
 </suite>
+
