@@ -11,6 +11,7 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.HomePage;
+import utils.Log4Test;
 
 import java.util.concurrent.TimeUnit;
 
@@ -26,7 +27,7 @@ public class ComparePricesTest {
     @DataProvider
     public Object [][] filters() {
         return new Object[][] {
-                new Object[] {"http://hotline.ua", "Nexus"},
+                new Object[] {"http://hotline.ua", "Newdwe"},
 
         };
     }
@@ -42,17 +43,21 @@ public class ComparePricesTest {
     public void comparePrices(String siteURL, String searchQuery)
 
     {
-
+        Log4Test.info("Start test of prices comparing");
         driver.get(siteURL);
-        System.out.println( "Opened result page " + driver.getCurrentUrl());
-        WebDriverWait wait = new WebDriverWait(driver,5);
+        Log4Test.info("Opening URL: " + siteURL );
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         driver.findElement(searchField).sendKeys(searchQuery);
         driver.findElement(searchBtn).submit();
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        Assert.assertTrue((driver.findElement(By.partialLinkText(searchQuery)).isDisplayed()), Log4Test.error("Couldn't find product" + searchQuery));
+        Log4Test.info("Searching for product:" + searchQuery + "on: " + driver.getCurrentUrl());
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         driver.findElement(By.className("but-box")).click();
-        driver.manage().timeouts().implicitlyWait(7, TimeUnit.SECONDS);
+        Log4Test.info("Opening page with prices: " + driver.getCurrentUrl());
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         int sum = driver.findElements(By.xpath("//a[contains(@href,'/go/price/') and @class='orng']")).size();
-        Assert.assertTrue(sum >= 2);
+        Assert.assertTrue((sum >= 2), Log4Test.error("Test passed, number of prices on page is : " + sum));
 /*
         if (sum >= 2)
         {System.out.println("Passed");}
