@@ -54,7 +54,9 @@ public class HomePage {
     }
 
     public FilterPage findCatalogItem(String category, String subcategory)
+
     {
+
         Actions action = new Actions(driver);
         WebElement we = driver.findElement(By.xpath("//b[contains(text(), '" + category + "')]"));
         Log4Test.info("Opening fridge category from menu...");

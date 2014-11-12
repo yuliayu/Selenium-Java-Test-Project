@@ -25,13 +25,13 @@ public class FindFridgeTest {
 
 
 
-    private static WebDriver driver;
+    private static WebDriverWrapper driver;
 
     @BeforeSuite
     public void setEnv()
     {
-//        driver = WebDriverFactory.initDriver(PropertyLoader.loadProperty("browser.name"));
-        driver = new HtmlUnitDriver();
+       driver = WebDriverFactory.initDriver(PropertyLoader.loadProperty("browser.name"));
+//        driver = new HtmlUnitDriver();
     }
 
     @Test
