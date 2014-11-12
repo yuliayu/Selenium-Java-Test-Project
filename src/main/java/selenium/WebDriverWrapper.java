@@ -14,7 +14,7 @@ public class WebDriverWrapper implements WebDriver {
     /**
      * Created by bionic on 11/10/14.
      */
-    public static WebDriver driver;
+    public WebDriver driver;
     private static final int TIME_TO_WAIT = 5;
 
     public WebDriverWrapper(WebDriver driver)
@@ -29,70 +29,76 @@ public class WebDriverWrapper implements WebDriver {
     }
 
     @Override
-    public String getCurrentUrl() {
-        return null;
+    public String getCurrentUrl()
+    {
+        return driver.getCurrentUrl();
     }
 
     @Override
-    public String getTitle() {
-        return null;
+    public String getTitle()
+    {
+        return driver.getTitle();
     }
 
     @Override
     public List<WebElement> findElements(By by) {
         WebDriverWait wait = new WebDriverWait(driver, TIME_TO_WAIT);
         wait.until(ExpectedConditions.presenceOfElementLocated(by));
-        driver.findElement(by);
-        return null;
+        return driver.findElements(by);
     }
 
     @Override
     public WebElement findElement(By by) {
         WebDriverWait wait = new WebDriverWait(driver, TIME_TO_WAIT);
         wait.until(ExpectedConditions.presenceOfElementLocated(by));
-        driver.findElement(by);
-
-        return null;
+       return  driver.findElement(by);
     }
 
     @Override
-    public String getPageSource() {
-        return null;
+    public String getPageSource()
+    {
+        return driver.getPageSource();
     }
 
     @Override
-    public void close() {
-
+    public void close()
+    {
+        driver.close();
     }
 
     @Override
-    public void quit() {
-
+    public void quit()
+    {
+        driver.quit();
     }
 
     @Override
-    public Set<String> getWindowHandles() {
-        return null;
+    public Set<String> getWindowHandles()
+    {
+        return driver.getWindowHandles();
     }
 
     @Override
-    public String getWindowHandle() {
-        return null;
+    public String getWindowHandle()
+    {
+        return driver.getWindowHandle();
     }
 
     @Override
-    public TargetLocator switchTo() {
-        return null;
+    public TargetLocator switchTo()
+    {
+        return driver.switchTo();
     }
 
     @Override
-    public Navigation navigate() {
-        return null;
+    public Navigation navigate()
+    {
+        return driver.navigate();
     }
 
     @Override
     public Options manage() {
-        return null;
+        return driver.manage();
     }
 }
 

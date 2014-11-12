@@ -10,8 +10,13 @@ import org.testng.annotations.*;
 import pages.HomePage;
 import pages.LoggedInPage;
 import pages.RegistrationPage;
+import selenium.WebDriverFactory;
+import utils.Log4Test;
+import utils.PropertyLoader;
 
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 /**
  * Created by test on 11/3/14.
@@ -19,48 +24,57 @@ import java.util.concurrent.TimeUnit;
 public class RegistrationTest {
     private WebDriver driver;
     @DataProvider
-    public Object [][] regtests() {
+    public Object [][] positive() {
         return new Object[][] {
-                new Object[] {"yulia.ys@ukr.net", "Yulia Yurchenko", "12345", "12345"},
-                new Object[] {"invalidmail@", "Yulia", "1234", "1234"},
-                new Object[] {"validmail@gmail.com", "", "1234", "1234"},
-                new Object[] {"validmail@mail.ru", "TEst Invalid Password", "123", "123"},
+                new Object[] {"Yulia Yurchenko", "12345", "12345"},
+        };
+    }
+    @DataProvider
+    public Object [][] negative() {
+        return new Object[][] {
+                new Object[] {"yulia.ys@ukr.net","Yulia Yurchenko", "12345", "12345"},
+                new Object[] {"yulia.y@ukr.net","Yulia Yurchenko", "123", "123"},
+                new Object[] {"yulia.s@ukr.net","", "12345", "12345"},
         };
     }
     @BeforeSuite
     public void setEnv()
     {
-        driver = new HtmlUnitDriver();
+        driver = WebDriverFactory.initDriver(PropertyLoader.loadProperty("browser.name"));
     }
-    @Test (dataProvider = "regtests")
-    public void register(String email, String nick, String passwd, String passwd2)
+
+    @Test (dataProvider = "positive")
+    public void register(String nick, String passwd, String passwd2)
+    {   String randomEmail = UUID.randomUUID().toString() + "@ukr.net";
+        Log4Test.info("Starting registration positive test");
+
+        HomePage homePage = new HomePage(driver);
+        homePage.open();
+        RegistrationPage registrationPage = homePage.goRegistration();
+        User user = new User();
+        user.email = randomEmail;
+        user.name = nick;
+        user.passwd = passwd;
+        user.passwd2 = passwd2;
+        registrationPage.fillRegistrationForm(user);
+        Assert.assertTrue(registrationPage.isRegistered(),"Failed to register");
+    }
+
+    @Test (dataProvider = "negative")
+    public void failedRegister(String email, String nick, String passwd, String passwd2)
     {
+        Log4Test.info("Starting registration negative test");
 
-        driver.get("http://hotline.ua/");
-        WebElement elementRegisterButton = driver.findElement(By.className("reg"));
-        elementRegisterButton.click();
-        System.out.println( "Opened page " + driver.getCurrentUrl());
-        WebElement elementEmail =  driver.findElement(By.name("email"));
-        elementEmail.sendKeys(email);
-        System.out.println( "Entered email: " + email);
-        WebElement elementNick = driver.findElement(By.name("nick"));
-        elementNick.sendKeys(nick);
-        System.out.println( "Entered nick: " + nick);
-        WebElement elementPasswd =  driver.findElement(By.name("password"));
-        elementPasswd.sendKeys(passwd);
-        System.out.println( "Entered password: " + passwd);
-        WebElement elementPasswd2 =  driver.findElement(By.name("password2"));
-        elementPasswd2.sendKeys(passwd2);
-        System.out.println( "Confirm password: " + passwd2);
-        WebElement elementForm =  driver.findElement(By.id("reg-form"));
-        elementForm.submit();
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        System.out.println( "Opened result page " + driver.getCurrentUrl());
-
-
-        Assert.assertFalse(driver.getCurrentUrl().contains("/final/"));
-
-
+        HomePage homePage = new HomePage(driver);
+        homePage.open();
+        RegistrationPage registrationPage = homePage.goRegistration();
+        User user = new User();
+        user.email = email;
+        user.name = nick;
+        user.passwd = passwd;
+        user.passwd2 = passwd2;
+        registrationPage.fillRegistrationForm(user);
+        Assert.assertFalse(registrationPage.isRegistered(), "Registration passed in negative test");
     }
     @AfterSuite
     public void closeEnv()

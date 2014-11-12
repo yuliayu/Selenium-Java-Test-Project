@@ -21,8 +21,8 @@ public class WebDriverFactory {
         else
             Assert.fail("Invalid driver configuration");
 
-//        driverWrapper.manage().deleteAllCookies();
-//        driverWrapper.manage().window().maximize();
+        driverWrapper.manage().deleteAllCookies();
+        driverWrapper.manage().window().maximize();
 
         return  driverWrapper;
     }

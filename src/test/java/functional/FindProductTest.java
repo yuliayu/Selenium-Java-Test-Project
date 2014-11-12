@@ -10,6 +10,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
+import pages.GoodsPage;
+import pages.HomePage;
+import selenium.WebDriverFactory;
+import utils.Log4Test;
+import utils.PropertyLoader;
 
 import java.util.concurrent.TimeUnit;
 
@@ -19,37 +24,51 @@ import java.util.concurrent.TimeUnit;
 public class FindProductTest {
 
     private static WebDriver driver;
-    private static final By searchField = By.id("searchbox");
-    private static final By searchBtn = By.id("doSearch");
 
     @DataProvider
-    public Object [][] filters() {
+    public Object [][] positive() {
         return new Object[][] {
-                new Object[] {"http://hotline.ua", "Nexus"},
+                new Object[] {"Nexus", "Nexus"},
+
+        };
+    }
+    @DataProvider
+    public Object [][] negative() {
+        return new Object[][] {
+                new Object[] {"CSDc", "CSDc"},
 
         };
     }
 
-
     @BeforeSuite
     public void setEnv()
     {
-        driver = new FirefoxDriver();
+        driver = WebDriverFactory.initDriver(PropertyLoader.loadProperty("browser.name"));
     }
-   // @Parameters({ "siteURL", "searchField"})
-    @Test (dataProvider = "filters")
-    public void findProduct(String siteURL, String searchQuery)
+    @Test (dataProvider = "positive")
+    public void findProductPos(String searchQuery, String verificationName)
 
     {
-        driver.get(siteURL);
-//        System.out.println( "Opened result page " + driver.getCurrentUrl());
-        WebDriverWait wait = new WebDriverWait(driver,5);
-        driver.findElement(searchField).sendKeys(searchQuery);
-        driver.findElement(searchBtn).submit();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-//        System.out.println( "Opened result page " + driver.getCurrentUrl());
-//       driver.findElement(By.("//a[contains(text(),'"+searchQuery+"']"));
-        Assert.assertTrue(driver.findElement(By.partialLinkText("Nexus")).isDisplayed());
+        Log4Test.info("Starting find product positive test");
+
+        HomePage homePage = new HomePage(driver);
+        homePage.open();
+        GoodsPage goodsPage = homePage.findProduct(searchQuery);
+
+        Assert.assertTrue(goodsPage.isFound(verificationName), "Failed to find product");
+
+    }
+    @Test (dataProvider = "negative")
+    public void findProductNeg(String searchQuery, String verificationName)
+
+    {
+        Log4Test.info("Starting find product negative test");
+
+        HomePage homePage = new HomePage(driver);
+        homePage.open();
+        GoodsPage goodsPage = homePage.findProduct(searchQuery);
+
+        Assert.assertFalse(goodsPage.isFound(verificationName), "Nagative test failed - found unreal product");
 
     }
         @AfterSuite
