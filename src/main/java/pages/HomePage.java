@@ -3,6 +3,7 @@ package pages;
 import actors.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import selenium.WebDriverWrapper;
 import utils.Log4Test;
 
 import java.util.concurrent.TimeUnit;
@@ -44,7 +45,7 @@ public class HomePage {
         Log4Test.info("Searching for the " + product);
         driver.findElement(searchField).sendKeys(product);
         driver.findElement(searchBtn).submit();
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(WebDriverWrapper.TIME_TO_WAIT, TimeUnit.SECONDS);
         return new GoodsPage(driver);
     }
 

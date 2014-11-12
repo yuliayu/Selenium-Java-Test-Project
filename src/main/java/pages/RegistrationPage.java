@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import selenium.WebDriverWrapper;
 import utils.Log4Test;
 
 import java.util.concurrent.TimeUnit;
@@ -36,7 +37,7 @@ public class RegistrationPage extends HomePage {
         Log4Test.info( "Confirm password: " + user.passwd2);
 
         driver.findElement(By.id("reg-form")).submit();
-       driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+       driver.manage().timeouts().implicitlyWait(WebDriverWrapper.TIME_TO_WAIT, TimeUnit.SECONDS);
 
         Log4Test.info(driver.getCurrentUrl());
 

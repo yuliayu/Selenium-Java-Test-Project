@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import selenium.WebDriverWrapper;
 import utils.Log4Test;
 
 import java.util.concurrent.TimeUnit;
@@ -33,7 +34,7 @@ public class GoodsPage extends HomePage {
     {
         driver.findElement(By.className("but-box")).click();
         Log4Test.info("Opening page with prices: " + driver.getCurrentUrl());
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(WebDriverWrapper.TIME_TO_WAIT, TimeUnit.SECONDS);
         return new ComparePricesPage(driver);
      }
 
