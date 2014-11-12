@@ -20,8 +20,6 @@ import utils.PropertyLoader;
 public class ComparePricesTest {
 
     private static WebDriverWrapper driver;
-    private static final By searchField = By.id("searchbox");
-    private static final By searchBtn = By.id("doSearch");
 
     @DataProvider
     public Object [][] filters() {

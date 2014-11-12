@@ -3,6 +3,9 @@ package pages;
 import actors.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
 import selenium.WebDriverWrapper;
 import utils.Log4Test;
 
@@ -49,5 +52,22 @@ public class HomePage {
         driver.manage().timeouts().implicitlyWait(WebDriverWrapper.TIME_TO_WAIT, TimeUnit.SECONDS);
         return new GoodsPage(driver);
     }
+
+    public FilterPage findCatalogItem(String category, String subcategory)
+    {
+        Actions action = new Actions(driver);
+        WebElement we = driver.findElement(By.xpath("//b[contains(text(), '" + category + "')]"));
+        Log4Test.info("Opening fridge category from menu...");
+        action.moveToElement(we).moveToElement(driver.findElement(By.xpath("//a[contains(text(), '" + subcategory + "')]"))).click().build().perform();
+        driver.manage().timeouts().implicitlyWait(WebDriverWrapper.TIME_TO_WAIT, TimeUnit.SECONDS);
+        driver.findElement(By.xpath("//div[@id='filters']//a[contains(text(), 'LG')]")).click();
+
+
+       // Select menu = new Select(driver.findElement(By.className("m-name")));
+        //menu.selectByVisibleText("Бытовая техника");
+
+        return new FilterPage(driver);
+    }
+
 
 }

@@ -45,7 +45,7 @@ public class RegistrationTest {
 
     @Test (dataProvider = "positive")
     public void register(String nick, String passwd, String passwd2)
-    {   String randomEmail = UUID.randomUUID().toString() + "@ukr.net";
+    {   String randomEmail = "a" + UUID.randomUUID().toString() + "@ukr.net";
         Log4Test.info("Starting registration positive test");
 
         HomePage homePage = new HomePage(driver);
