@@ -43,6 +43,7 @@ public class HomePage {
     public GoodsPage findProduct(String product)
     {
         Log4Test.info("Searching for the " + product);
+        driver.findElement(searchField).clear();
         driver.findElement(searchField).sendKeys(product);
         driver.findElement(searchBtn).submit();
         driver.manage().timeouts().implicitlyWait(WebDriverWrapper.TIME_TO_WAIT, TimeUnit.SECONDS);

@@ -46,14 +46,13 @@ public class ComparePricesTest {
         HomePage homePage = new HomePage(driver);
         homePage.open();
         GoodsPage goodsPage = homePage.findProduct(searchQuery);
-       if (goodsPage.isFound(searchQuery))
-       {
-           ComparePricesPage comparePrices = goodsPage.firstItemComparePrices();
-           int sum = comparePrices.countPriceElements();
-           Assert.assertTrue((sum >= 2), "Test failed, number of price elements " + sum);
-           Log4Test.info("Test passed, number of prices on page is : " + sum);
+       Assert.assertTrue(goodsPage.isFound(searchQuery));
+       ComparePricesPage comparePrices = goodsPage.firstItemComparePrices();
+       int sum = comparePrices.countPriceElements();
+       Assert.assertTrue((sum >= 2), "Test failed, number of price elements " + sum);
+       Log4Test.info("Test passed, number of prices on page is : " + sum);
 
-       }
+
 
     }
     @AfterSuite

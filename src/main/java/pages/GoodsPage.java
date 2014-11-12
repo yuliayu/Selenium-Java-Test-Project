@@ -21,7 +21,7 @@ public class GoodsPage extends HomePage {
     {
         try
         {
-            return driver.findElement(By.partialLinkText(product)).isDisplayed();
+            return driver.findElement(By.xpath("//a[contains(text(), '" + product + "')]")).isDisplayed();
 
         }
         catch(TimeoutException ex)
