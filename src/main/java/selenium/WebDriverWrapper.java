@@ -15,7 +15,7 @@ public class WebDriverWrapper implements WebDriver {
      * Created by bionic on 11/10/14.
      */
     public WebDriver driver;
-    private static final int TIME_TO_WAIT = 5;
+    public static final int TIME_TO_WAIT = 15;
 
     public WebDriverWrapper(WebDriver driver)
     {
