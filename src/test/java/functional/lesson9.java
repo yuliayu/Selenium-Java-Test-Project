@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by test on 11/17/14.
  */
-public class lesson9 {
+public class lesson9 extends FunctionalTest{
     public static WebDriverWrapper driver;
     public final  By CLOSESELECTOR = By.id("shade");
 

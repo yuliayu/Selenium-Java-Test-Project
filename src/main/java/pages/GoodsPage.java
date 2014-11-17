@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by bionic on 11/5/14.
  */
-public class GoodsPage extends HomePage {
+public class  GoodsPage extends HomePage {
     public GoodsPage(WebDriverWrapper driver)
     {
         super(driver);

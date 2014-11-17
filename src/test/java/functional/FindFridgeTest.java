@@ -19,18 +19,10 @@ import java.util.regex.Pattern;
 /**
  * Created by test on 11/12/14.
  */
-public class FindFridgeTest {
+public class FindFridgeTest extends FunctionalTest {
 
 
 public static final String testFilterName = "LG";
-    private static WebDriverWrapper driver;
-
-    @BeforeSuite
-    public void setEnv()
-    {
-       driver = WebDriverFactory.initDriver(PropertyLoader.loadProperty("browser.name"));
-//        driver = new HtmlUnitDriver();
-    }
 
     @Test
     public void findFridge()
@@ -48,7 +40,6 @@ public static final String testFilterName = "LG";
         Assert.assertTrue(firstItem.name.toUpperCase().contains(testFilterName), "Fail to find " +testFilterName);
         Assert.assertTrue(secondItem.name.toUpperCase().contains(testFilterName),"Fail to find " + testFilterName);
         Assert.assertTrue(fetchPrice(firstItem) < fetchPrice(secondItem),"Sorting is incorrect");
-
 
     }
     private int fetchPrice(Product product)
@@ -74,14 +65,6 @@ public static final String testFilterName = "LG";
         Log4Test.info("Final price (int) is " + finalPrice);
         return finalPrice;
 
-    }
-    @AfterSuite
-    public void closeEnv()
-    {
-        if (driver!=null)
-        {
-            driver.quit();
-        }
     }
 }
 

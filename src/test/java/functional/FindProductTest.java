@@ -22,9 +22,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by bionic on 11/5/14.
  */
-public class FindProductTest {
+public class FindProductTest extends FunctionalTest{
 
-    private static WebDriverWrapper driver;
 
     @DataProvider
     public Object [][] positive() {
@@ -41,11 +40,6 @@ public class FindProductTest {
         };
     }
 
-    @BeforeSuite
-    public void setEnv()
-    {
-        driver = WebDriverFactory.initDriver(PropertyLoader.loadProperty("browser.name"));
-    }
     @Test (dataProvider = "positive")
     public void findProductPos(String searchQuery, String verificationName)
 
@@ -72,12 +66,4 @@ public class FindProductTest {
         Assert.assertFalse(goodsPage.isFound(verificationName), "Nagative test failed - found unreal product");
 
     }
-        @AfterSuite
-        public void closeEnv()
-        {
-            if (driver!=null)
-            {
-                driver.quit();
-            }
-        }
 }
