@@ -12,6 +12,10 @@ import selenium.WebDriverWrapper;
 import utils.Log4Test;
 import utils.PropertyLoader;
 
+import java.nio.charset.Charset;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Created by test on 11/12/14.
  */
@@ -49,6 +53,19 @@ public static final String testFilterName = "LG";
     }
     private int fetchPrice(Product product)
     {
+//        String price = product.price;
+//        String removeSpace = price.replace(" ", "");
+//        Matcher matcher = Pattern.compile("[0-9]+").matcher(removeSpace);
+//        String strPrice = null;
+//        if (matcher.find()) {
+//            strPrice = removeSpace.substring(matcher.start(), matcher.end());
+//        }
+//
+//        Log4Test.info("Price (string) is " + strPrice);
+//        int finalPrice = Integer.parseInt(strPrice);
+//        Log4Test.info("Final price (int) is " + finalPrice);
+//        return finalPrice;
+
         String price = product.price;
         String splitPrices [] = price.split("грн");
         String removeSpace = splitPrices[0].replace(" ","");
@@ -56,6 +73,7 @@ public static final String testFilterName = "LG";
         int finalPrice = Integer.parseInt(removeSpace);
         Log4Test.info("Final price (int) is " + finalPrice);
         return finalPrice;
+
     }
     @AfterSuite
     public void closeEnv()

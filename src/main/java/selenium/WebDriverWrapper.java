@@ -18,6 +18,7 @@ public class WebDriverWrapper implements WebDriver{
     public WebDriver driver;
     public static final int TIME_TO_WAIT = 15;
 
+
     public WebDriverWrapper(WebDriver driver)
     {
         this.driver=driver;

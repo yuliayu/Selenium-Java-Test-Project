@@ -3,9 +3,9 @@
 <suite name="functionalTests" verbose="1" >
     <test name="FindProduct">
         <classes>
-            <class name="functional.RegistrationTest" />
-            <class name="functional.FindProductTest" />
-            <class name="functional.ComparePricesTest" />
+            <!--<class name="functional.RegistrationTest" />-->
+            <!--<class name="functional.FindProductTest" />-->
+            <!--<class name="functional.ComparePricesTest" />-->
             <class name="functional.FindFridgeTest" />
         </classes>
     </test>
