@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import selenium.WebDriverWrapper;
 import utils.Log4Test;
 
 /**
@@ -10,7 +11,7 @@ import utils.Log4Test;
  */
 public class ComparePricesPage extends HomePage {
 
-    public ComparePricesPage(WebDriver driver)
+    public ComparePricesPage(WebDriverWrapper driver)
     {
         super(driver);
     }

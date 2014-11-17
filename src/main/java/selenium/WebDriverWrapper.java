@@ -3,6 +3,7 @@ package selenium;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -10,7 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 import java.util.Set;
 
-public class WebDriverWrapper implements WebDriver {
+public class WebDriverWrapper implements WebDriver{
     /**
      * Created by bionic on 11/10/14.
      */
@@ -26,6 +27,11 @@ public class WebDriverWrapper implements WebDriver {
     public void get(String s) {
         driver.get(s);
 
+    }
+
+    public WebDriver getOriginalDriver()
+    {
+        return driver;
     }
 
     @Override

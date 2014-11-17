@@ -13,6 +13,7 @@ import org.testng.annotations.*;
 import pages.GoodsPage;
 import pages.HomePage;
 import selenium.WebDriverFactory;
+import selenium.WebDriverWrapper;
 import utils.Log4Test;
 import utils.PropertyLoader;
 
@@ -23,7 +24,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class FindProductTest {
 
-    private static WebDriver driver;
+    private static WebDriverWrapper driver;
 
     @DataProvider
     public Object [][] positive() {

@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  * Created by test on 11/3/14.
  */
 public class RegistrationPage extends HomePage {
-    public RegistrationPage(WebDriver driver)
+    public RegistrationPage(WebDriverWrapper driver)
     {
         super(driver);
     }
