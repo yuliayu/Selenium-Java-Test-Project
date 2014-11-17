@@ -67,7 +67,7 @@ public static final String testFilterName = "LG";
 //        return finalPrice;
 
         String price = product.price;
-        String splitPrices [] = price.split("грн");
+        String splitPrices [] = price.split("\u0433\u0440\u043d");
         String removeSpace = splitPrices[0].replace(" ","");
         Log4Test.info("Price (string) is " + removeSpace);
         int finalPrice = Integer.parseInt(removeSpace);
