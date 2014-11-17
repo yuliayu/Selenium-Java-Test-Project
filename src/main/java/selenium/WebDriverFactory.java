@@ -22,7 +22,7 @@ public class WebDriverFactory {
             Assert.fail("Invalid driver configuration");
 
         driverWrapper.manage().deleteAllCookies();
-     //   driverWrapper.manage().window().maximize();
+        driverWrapper.manage().window().maximize();
 
         return  driverWrapper;
     }

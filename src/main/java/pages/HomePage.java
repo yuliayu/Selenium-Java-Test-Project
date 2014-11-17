@@ -21,12 +21,12 @@ public class HomePage {
     private static final By searchBtn = By.id("doSearch");
     public static final String SITE = "http://hotline.ua";
     private static final By registerBtn = By.className("reg");
+    public final  By CLOSESELECTOR = By.id("shade");
 
 
+    protected WebDriverWrapper driver;
 
-    protected WebDriver driver;
-
-    public HomePage(WebDriver driver)
+    public HomePage(WebDriverWrapper driver)
     {
         this.driver = driver;
     }
@@ -34,8 +34,12 @@ public class HomePage {
     public void open()
     {
         driver.get(SITE);
+        closeSelector();
     }
 
+    public void closeSelector() {
+        driver.findElement(CLOSESELECTOR).click();
+    }
 
     public RegistrationPage goRegistration()
     {
@@ -53,19 +57,20 @@ public class HomePage {
         return new GoodsPage(driver);
     }
 
-    public FilterPage findCatalogItem(String category, String subcategory)
+    public FilterPage findFridgeItem()
 
     {
-
-        Actions action = new Actions(driver);
-        WebElement we = driver.findElement(By.xpath("//b[contains(text(), '" + category + "')]"));
+        Actions actions = new Actions(driver.getOriginalDriver());
+        actions.moveToElement(driver.findElement(By.xpath("//a[@href='/bt/']")));
         Log4Test.info("Opening fridge category from menu...");
-        action.moveToElement(we).moveToElement(driver.findElement(By.xpath("//a[contains(text(), '" + subcategory + "')]"))).click().build().perform();
-        driver.manage().timeouts().implicitlyWait(WebDriverWrapper.TIME_TO_WAIT, TimeUnit.SECONDS);
-        driver.findElement(By.xpath("//div[@id='filters']//a[contains(text(), 'LG')]")).click();
+        actions.perform();
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        driver.findElement(By.xpath("//a[@href='/bt/holodilniki/']")).click();
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 
 
-       // Select menu = new Select(driver.findElement(By.className("m-name")));
+
+        // Select menu = new Select(driver.findElement(By.className("m-name")));
         //menu.selectByVisibleText("Бытовая техника");
 
         return new FilterPage(driver);

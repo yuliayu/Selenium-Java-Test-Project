@@ -8,9 +8,9 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.HomePage;
-import pages.LoggedInPage;
 import pages.RegistrationPage;
 import selenium.WebDriverFactory;
+import selenium.WebDriverWrapper;
 import utils.Log4Test;
 import utils.PropertyLoader;
 
@@ -22,7 +22,7 @@ import java.util.logging.Logger;
  * Created by test on 11/3/14.
  */
 public class RegistrationTest {
-    private WebDriver driver;
+    private WebDriverWrapper driver;
     @DataProvider
     public Object [][] positive() {
         return new Object[][] {
