@@ -20,6 +20,12 @@
                 <browser.name>firefox</browser.name>
             </properties>
         </profile>
+        <profile>
+        <id>firefox_remote</id>
+        <properties>
+            <browser.name>firefox_remote</browser.name>
+        </properties>
+    </profile>
     </profiles>
     <build>
         <resources>

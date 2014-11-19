@@ -19,10 +19,18 @@ import java.util.regex.Pattern;
 /**
  * Created by test on 11/12/14.
  */
-public class FindFridgeTest extends FunctionalTest {
+public class FindFridgeTest {
 
 
 public static final String testFilterName = "LG";
+    public WebDriverWrapper driver;
+    @BeforeSuite
+    public void setEnv()
+
+    {
+        driver = WebDriverFactory.initDriver(PropertyLoader.loadProperty("browser.name"));
+        driver.get("http://hotline.ua");
+    }
 
     @Test
     public void findFridge()
@@ -65,6 +73,14 @@ public static final String testFilterName = "LG";
         Log4Test.info("Final price (int) is " + finalPrice);
         return finalPrice;
 
+    }
+    @AfterSuite
+    public void closeEnv()
+    {
+        if (driver!=null)
+        {
+            driver.quit();
+        }
     }
 }
 

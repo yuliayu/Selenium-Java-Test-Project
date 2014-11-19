@@ -22,9 +22,15 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by bionic on 11/5/14.
  */
-public class FindProductTest extends FunctionalTest{
+public class FindProductTest {
+    public WebDriverWrapper driver;
+    @BeforeSuite
+    public void setEnv()
 
-
+    {
+        driver = WebDriverFactory.initDriver(PropertyLoader.loadProperty("browser.name"));
+        driver.get("http://hotline.ua");
+    }
     @DataProvider
     public Object [][] positive() {
         return new Object[][] {
@@ -65,5 +71,13 @@ public class FindProductTest extends FunctionalTest{
 
         Assert.assertFalse(goodsPage.isFound(verificationName), "Nagative test failed - found unreal product");
 
+    }
+    @AfterSuite
+    public void closeEnv()
+    {
+        if (driver!=null)
+        {
+            driver.quit();
+        }
     }
 }

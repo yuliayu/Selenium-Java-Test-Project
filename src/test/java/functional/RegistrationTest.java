@@ -21,7 +21,15 @@ import java.util.logging.Logger;
 /**
  * Created by test on 11/3/14.
  */
-public class RegistrationTest extends FunctionalTest{
+public class RegistrationTest {
+    public WebDriverWrapper driver;
+    @BeforeSuite
+    public void setEnv()
+
+    {
+        driver = WebDriverFactory.initDriver(PropertyLoader.loadProperty("browser.name"));
+        driver.get("http://hotline.ua");
+    }
     @DataProvider
     public Object [][] positive() {
         return new Object[][] {
@@ -70,6 +78,14 @@ public class RegistrationTest extends FunctionalTest{
         user.passwd2 = passwd2;
         registrationPage.fillRegistrationForm(user);
         Assert.assertFalse(registrationPage.isRegistered(), "Registration passed in negative test");
+    }
+    @AfterSuite
+      public void closeEnv()
+    {
+        if (driver!=null)
+        {
+            driver.quit();
+        }
     }
 
 }
