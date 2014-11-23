@@ -38,7 +38,11 @@ public class HomePage {
     }
 
     public void closeSelector() {
-        driver.findElement(CLOSESELECTOR).click();
+       WebElement shade = driver.findElement(CLOSESELECTOR);
+        if (shade.isDisplayed())
+        {
+            shade.click();
+        }
     }
 
     public RegistrationPage goRegistration()

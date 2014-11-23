@@ -1,17 +1,19 @@
 package selenium;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.Log4Test;
 
 import java.util.List;
 import java.util.Set;
 
-public class WebDriverWrapper implements WebDriver{
+public class WebDriverWrapper implements WebDriver,TakesScreenshot{
     /**
      * Created by bionic on 11/10/14.
      */
@@ -107,6 +109,26 @@ public class WebDriverWrapper implements WebDriver{
     public Options manage() {
         return driver.manage();
     }
+    @Override
+    public <X> X getScreenshotAs(OutputType<X> outType) {
+        try {
+            if (driver instanceof FirefoxDriver) {
+                return ((FirefoxDriver) driver).getScreenshotAs(outType);
+            } else if (driver instanceof ChromeDriver) {
+                return ((ChromeDriver) driver).getScreenshotAs(outType);
+            } else if (driver instanceof InternetExplorerDriver) {
+                return ((InternetExplorerDriver) driver).getScreenshotAs(outType);
+            } else {
+                return null;
+            }
+        }
+        catch (Exception e)
+        {
+            Log4Test.error("Unexpected exception in getScreenshotAS: " + e.getMessage());
+        }
+        return null;
+    }
+
 }
 
 
