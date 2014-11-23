@@ -11,15 +11,16 @@ import utils.Log4Test;
  */
 public class ComparePricesPage extends HomePage {
 
+    private static final By productItem = By.xpath("//a[contains(@href,'/go/price/') and @class='orng']");
+
     public ComparePricesPage(WebDriverWrapper driver)
     {
         super(driver);
     }
     public int countPriceElements()
+
     {
-        return driver.findElements(By.xpath("//a[contains(@href,'/go/price/') and @class='orng']")).size();
+        return driver.findElements(productItem).size();
     }
-
-
 
 }

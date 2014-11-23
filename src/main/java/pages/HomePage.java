@@ -21,7 +21,9 @@ public class HomePage {
     private static final By searchBtn = By.id("doSearch");
     public static final String SITE = "http://hotline.ua";
     private static final By registerBtn = By.className("reg");
-    public final  By CLOSESELECTOR = By.id("shade");
+    public static final  By CLOSESELECTOR = By.id("shade");
+    private static final By catalogItemBt = By.xpath("//a[@href='/bt/']");
+    private static final By holodilnikiItem = By.xpath("//a[@href='/bt/holodilniki/']");
 
 
     protected WebDriverWrapper driver;
@@ -65,17 +67,11 @@ public class HomePage {
 
     {
         Actions actions = new Actions(driver.getOriginalDriver());
-        actions.moveToElement(driver.findElement(By.xpath("//a[@href='/bt/']")));
+        actions.moveToElement(driver.findElement(catalogItemBt));
         Log4Test.info("Opening fridge category from menu...");
         actions.perform();
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-        driver.findElement(By.xpath("//a[@href='/bt/holodilniki/']")).click();
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-
-
-
-        // Select menu = new Select(driver.findElement(By.className("m-name")));
-        //menu.selectByVisibleText("Бытовая техника");
+        driver.manage().timeouts().implicitlyWait(WebDriverWrapper.TIME_TO_WAIT, TimeUnit.SECONDS);
+        driver.findElement(holodilnikiItem).click();
 
         return new FilterPage(driver);
     }

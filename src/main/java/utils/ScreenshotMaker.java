@@ -7,7 +7,6 @@ import org.openqa.selenium.remote.Augmenter;
 import selenium.WebDriverWrapper;
 
 import java.io.File;
-import java.io.IOException;
 
 /**
  * Created by test on 11/23/14.
@@ -15,11 +14,6 @@ import java.io.IOException;
 public class ScreenshotMaker {
         protected WebDriverWrapper driver;
         private static String screenShotDirectory;
-
-        public static void clearScreenShotSubDirectory(String screenShotSubDirectory)
-        {
-
-        }
 
         public ScreenshotMaker(WebDriverWrapper driver)
         {
@@ -40,7 +34,7 @@ public class ScreenshotMaker {
             }
             catch (Exception e)
             {
-
+                Log4Test.error("Failed to get screenshot" + e.getMessage());
             }
         }
     }

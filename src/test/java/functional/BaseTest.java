@@ -30,7 +30,6 @@ public abstract class BaseTest {
 
             }
         }
-        ScreenshotMaker.clearScreenShotSubDirectory("");
     }
     @BeforeClass
     public void setEnv()
@@ -41,13 +40,12 @@ public abstract class BaseTest {
     @AfterMethod
     public void takeScreenshot(ITestResult result) {
         if (result.getStatus() == ITestResult.FAILURE) {
-            String pageName = driver.getTitle();
-            Log4Test.info("Taking screenshot for: " + pageName);
-            ScreenshotMaker screenshotMaker = new ScreenshotMaker(driver);
-            screenshotMaker.takeScreenShot(pageName);
-
-            //    /target/screenShot/PageName
-
+            if (driver != null) {
+                String pageName = driver.getTitle();
+                Log4Test.info("Taking screenshot for: " + pageName);
+                ScreenshotMaker screenshotMaker = new ScreenshotMaker(driver);
+                screenshotMaker.takeScreenShot(pageName);
+            }
         }
     }
     @AfterClass

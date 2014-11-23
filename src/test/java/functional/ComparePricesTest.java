@@ -31,7 +31,7 @@ public class ComparePricesTest extends BaseTest{
     public void comparePrices(String searchQuery)
 
     {
-        Log4Test.info("Start test of prices comparing");
+        Log4Test.info("-------------Starting test of prices comparing-------------");
         HomePage homePage = new HomePage(driver);
         homePage.open();
         GoodsPage goodsPage = homePage.findProduct(searchQuery);

@@ -20,23 +20,29 @@ public class RegistrationPage extends HomePage {
         super(driver);
     }
 
+    private static final By emailField = By.name("email");
+    private static final By nickField = By.name("nick");
+    private static final By passwordField = By.name("password");
+    private static final By confirmPwdField = By.name("password2");
+    private static final By registrationBtn = By.xpath("//*[@id = 'reg-form']//*[@class = 'blue-button']");
+
     public void fillRegistrationForm(User user)
     {
-
-       driver.findElement(By.name("email")).sendKeys(user.email);
+        driver.findElement(nickField).clear();
+        driver.findElement(emailField).sendKeys(user.email);
         Log4Test.info("Entered email: " + user.email);
 
-        driver.findElement(By.name("nick")).clear();
-        driver.findElement(By.name("nick")).sendKeys(user.name);
+        driver.findElement(nickField).clear();
+        driver.findElement(nickField).sendKeys(user.name);
         Log4Test.info( "Entered nick: " + user.name);
 
-        driver.findElement(By.name("password")).sendKeys(user.passwd);
+        driver.findElement(passwordField).sendKeys(user.passwd);
         Log4Test.info( "Entered password: " + user.passwd);
 
-        driver.findElement(By.name("password2")).sendKeys(user.passwd2);
+        driver.findElement(confirmPwdField).sendKeys(user.passwd2);
         Log4Test.info( "Confirm password: " + user.passwd2);
 
-        driver.findElement(By.id("reg-form")).submit();
+        driver.findElement(registrationBtn).click();
        driver.manage().timeouts().implicitlyWait(WebDriverWrapper.TIME_TO_WAIT, TimeUnit.SECONDS);
 
         Log4Test.info(driver.getCurrentUrl());

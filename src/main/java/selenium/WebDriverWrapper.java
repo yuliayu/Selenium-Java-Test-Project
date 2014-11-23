@@ -18,7 +18,7 @@ public class WebDriverWrapper implements WebDriver,TakesScreenshot{
      * Created by bionic on 11/10/14.
      */
     public WebDriver driver;
-    public static final int TIME_TO_WAIT = 15;
+    public static final int TIME_TO_WAIT = 25;
 
 
     public WebDriverWrapper(WebDriver driver)
@@ -124,7 +124,7 @@ public class WebDriverWrapper implements WebDriver,TakesScreenshot{
         }
         catch (Exception e)
         {
-            Log4Test.error("Unexpected exception in getScreenshotAS: " + e.getMessage());
+            Log4Test.error("Unexpected exception in getScreenshotAs: " + e.getMessage());
         }
         return null;
     }

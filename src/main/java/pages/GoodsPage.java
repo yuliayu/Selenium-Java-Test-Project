@@ -12,6 +12,9 @@ import java.util.concurrent.TimeUnit;
  * Created by bionic on 11/5/14.
  */
 public class GoodsPage extends HomePage {
+    private static  final By comparePricesBtn = By.className("but-box");
+
+
     public GoodsPage(WebDriverWrapper driver)
     {
         super(driver);
@@ -19,9 +22,11 @@ public class GoodsPage extends HomePage {
 
     public boolean isFound(String product)
     {
+        final By productToSearch = By.xpath("//a[contains(text(), '" + product + "')]");
+
         try
         {
-            return driver.findElement(By.xpath("//a[contains(text(), '" + product + "')]")).isDisplayed();
+            return driver.findElement(productToSearch).isDisplayed();
 
         }
         catch(TimeoutException ex)
@@ -32,7 +37,7 @@ public class GoodsPage extends HomePage {
     }
     public ComparePricesPage firstItemComparePrices()
     {
-        driver.findElement(By.className("but-box")).click();
+        driver.findElement(comparePricesBtn).click();
         Log4Test.info("Opening page with prices: " + driver.getCurrentUrl());
         driver.manage().timeouts().implicitlyWait(WebDriverWrapper.TIME_TO_WAIT, TimeUnit.SECONDS);
         return new ComparePricesPage(driver);

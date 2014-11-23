@@ -28,18 +28,21 @@ public class FindFridgeTest extends BaseTest {
     public void findFridge()
 
     {
-        Log4Test.info("Start test of finding fridge");
+        Log4Test.info("-------------Starting test of finding fridge-------------");
+
         HomePage homePage = new HomePage(driver);
         homePage.open();
         FilterPage filterPage = homePage.findFridgeItem();
         filterPage.addFilter(testFilterName);
+        Log4Test.info("Sorting fridges by price...");
         filterPage.sortByPrice();
         Assert.assertTrue(filterPage.isFridgeFilterPageOpened(), "Page 'Холодильники' not found");
         Product firstItem = filterPage.getProductByIndex(1);
         Product secondItem =  filterPage.getProductByIndex(2);
-        Assert.assertTrue(firstItem.name.toUpperCase().contains(testFilterName), "Fail to find " +testFilterName);
+        Assert.assertTrue(firstItem.name.toUpperCase().contains(testFilterName), "Fail to find " + testFilterName);
         Assert.assertTrue(secondItem.name.toUpperCase().contains(testFilterName),"Fail to find " + testFilterName);
         Assert.assertTrue(fetchPrice(firstItem) < fetchPrice(secondItem),"Sorting is incorrect");
+        Log4Test.info("Sorting of fridges is correct");
 
 
     }

@@ -44,26 +44,28 @@ public class FindProductTest extends BaseTest {
     public void findProductPos(String searchQuery, String verificationName)
 
     {
-        Log4Test.info("Starting find product positive test");
+        Log4Test.info("-------------Starting find product positive test-------------");
 
         HomePage homePage = new HomePage(driver);
         homePage.open();
         GoodsPage goodsPage = homePage.findProduct(searchQuery);
 
         Assert.assertTrue(goodsPage.isFound(verificationName), "Failed to find product");
+        Log4Test.info("Product " + searchQuery + " is found ");
 
     }
     @Test (dataProvider = "negative")
     public void findProductNeg(String searchQuery, String verificationName)
 
     {
-        Log4Test.info("Starting find product negative test");
+        Log4Test.info("-------------Starting find product negative test-------------");
 
         HomePage homePage = new HomePage(driver);
         homePage.open();
         GoodsPage goodsPage = homePage.findProduct(searchQuery);
 
-        Assert.assertFalse(goodsPage.isFound(verificationName), "Nagative test failed - found unreal product");
+        Assert.assertFalse(goodsPage.isFound(verificationName), "Negative test failed - found unreal product");
+        Log4Test.info("Negative test of finding product passed ");
 
     }
 }
